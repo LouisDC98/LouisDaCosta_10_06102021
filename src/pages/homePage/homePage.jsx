@@ -6,7 +6,7 @@ import Catch from '../../components/Catch/Catch';
 
 function homePage() {
     return (
-        <div>
+        <React.Fragment>
             <Header sign={'in'} />
             <Slogan />
             <CatchShape>
@@ -30,7 +30,7 @@ function homePage() {
                     }
                 />
             </CatchShape>
-        </div>
+        </React.Fragment>
     );
 }
 
