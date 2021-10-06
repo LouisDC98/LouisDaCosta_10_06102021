@@ -9,7 +9,9 @@ function Header(props) {
 
     return (
         <NavHeader>
-            <LogoHeader src={logo}></LogoHeader>
+            <HomeLink to="/">
+                <LogoHeader src={logo}></LogoHeader>
+            </HomeLink>
             {sign === 'out' && (
                 <ProfileHeader>
                     <FaUserCircle />
@@ -24,6 +26,11 @@ function Header(props) {
     );
 }
 
+const HomeLink = styled(NavLink)`
+    padding: 0;
+    margin: 0;
+`;
+
 const LogoHeader = styled.img`
     max-width: 100%;
     width: 200px;
@@ -33,7 +40,7 @@ const NavHeader = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px 20px;
+    padding: 3px 20px;
     background-color: white;
 `;
 
