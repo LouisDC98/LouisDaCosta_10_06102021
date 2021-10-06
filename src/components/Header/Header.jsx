@@ -10,15 +10,13 @@ function Header(props) {
     return (
         <NavHeader>
             <LogoHeader src={logo}></LogoHeader>
-            {sign === 'out' ? (
+            {sign === 'out' && (
                 <ProfileHeader>
                     <FaUserCircle />
                     <LinkHeader to="/">UserName</LinkHeader>
                 </ProfileHeader>
-            ) : (
-                ''
             )}
-            <SignHeader to="/">
+            <SignHeader to="/login">
                 {sign === 'in' ? <FaUserCircle /> : <FaSignOutAlt />}
                 <LinkHeader>{sign === 'in' ? 'Sign In' : 'Sign Out'}</LinkHeader>
             </SignHeader>
@@ -50,7 +48,7 @@ const SignHeader = styled(NavLink)`
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 85px;
+    width: 90px;
     color: #2c3e50;
     text-decoration: none;
     margin-right: 8px;
