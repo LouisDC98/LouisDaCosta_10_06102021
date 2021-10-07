@@ -5,27 +5,38 @@ import EditName from 'components/EditName/EditName';
 import Count from 'components/Count/Count';
 
 function UserPage() {
-    let history = useParams();
+    let params = useParams();
+
+    const count = [
+        {
+            montant: '$2,082.79',
+            title: 'Argent Bank Checking (x8349)',
+            description: 'Available Balance'
+        },
+        {
+            montant: '$10,928.42',
+            title: 'Argent Bank Savings (x6712)',
+            description: 'Available Balance'
+        },
+        {
+            montant: '$184.30',
+            title: 'Argent Bank Credit Card (x8349)',
+            description: 'Current Balance'
+        }
+    ];
 
     return (
         <BgUserPage>
-            <TitleUserPage>Welcome back {history.id} !</TitleUserPage>
+            <TitleUserPage>Welcome back {params.id} !</TitleUserPage>
             <EditName />
-            <Count
-                montant={'$2,082.79'}
-                title={'Argent Bank Checking (x8349)'}
-                description={'Available Balance'}
-            />
-            <Count
-                montant={'$10,928.42'}
-                title={'Argent Bank Savings (x6712)'}
-                description={'Available Balance'}
-            />
-            <Count
-                montant={'$184.30'}
-                title={'Argent Bank Credit Card (x8349)'}
-                description={'Current Balance'}
-            />
+            {count.map((data, index) => (
+                <Count
+                    key={index + 1}
+                    montant={data.montant}
+                    title={data.title}
+                    description={data.description}
+                />
+            ))}
         </BgUserPage>
     );
 }

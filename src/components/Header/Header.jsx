@@ -8,9 +8,7 @@ function Header() {
     const [sign, setSign] = useState('in');
 
     const handleClick = () => {
-        if (sign === 'in') {
-            setSign('out');
-        } else setSign('in');
+        setSign(sign === 'in' ? 'out' : 'in');
     };
 
     return (
