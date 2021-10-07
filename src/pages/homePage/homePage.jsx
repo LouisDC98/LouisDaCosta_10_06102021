@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../../components/Header/Header';
 import Slogan from '../../components/Slogan/Slogan';
 import Catch from '../../components/Catch/Catch';
 
 function HomePage() {
     return (
         <React.Fragment>
-            <Header sign={'in'} />
             <Slogan />
             <CatchShape>
                 <Catch

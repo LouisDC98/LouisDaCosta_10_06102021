@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../../components/Header/Header';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
 function LoginPage() {
     return (
         <React.Fragment>
-            <Header sign={'in'} />
             <Form>
                 <LoginForm />
             </Form>

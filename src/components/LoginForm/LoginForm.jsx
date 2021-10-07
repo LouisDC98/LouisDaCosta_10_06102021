@@ -2,11 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router';
 
 function LoginForm() {
     const { register, handleSubmit } = useForm();
 
-    const onSubmit = (data) => console.log(data);
+    const history = useHistory();
+
+    const onSubmit = (data) => {
+        history.push('/user/' + data.Username);
+        console.log(data);
+    };
 
     return (
         <BlocForm>

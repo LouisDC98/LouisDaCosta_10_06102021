@@ -1,30 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import logo from '../../img/argentBankLogo.png';
 import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
 
-function Header(props) {
-    const { sign } = props;
+function Header() {
+    const [sign, setSign] = useState('in');
+
+    const handleClick = () => {
+        if (sign === 'in') {
+            setSign('out');
+        } else setSign('in');
+    };
 
     return (
         <NavHeader>
             <HomeLink to="/">
                 <LogoHeader src={logo}></LogoHeader>
             </HomeLink>
-            {sign === 'out' && (
-                <ProfileHeader>
-                    <FaUserCircle />
-                    <LinkHeader to="/">UserName</LinkHeader>
-                </ProfileHeader>
-            )}
-            <SignHeader to="/login">
-                {sign === 'in' ? <FaUserCircle /> : <FaSignOutAlt />}
-                <LinkHeader>{sign === 'in' ? 'Sign In' : 'Sign Out'}</LinkHeader>
-            </SignHeader>
+            <button onClick={handleClick}>X</button>
+            <BlocLink>
+                {sign === 'out' && (
+                    <ProfileHeader>
+                        <FaUserCircle />
+                        <LinkHeader to="/">name</LinkHeader>
+                    </ProfileHeader>
+                )}
+                <SignHeader to="/login">
+                    {sign === 'in' ? <FaUserCircle /> : <FaSignOutAlt />}
+                    <LinkHeader>{sign === 'in' ? 'Sign In' : 'Sign Out'}</LinkHeader>
+                </SignHeader>
+            </BlocLink>
         </NavHeader>
     );
 }
+
+const BlocLink = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    width: 300px;
+`;
 
 const HomeLink = styled(NavLink)`
     padding: 0;
@@ -66,9 +81,10 @@ const SignHeader = styled(NavLink)`
 
 const ProfileHeader = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    width: 75px;
+    width: 150px;
+    margin-right: 20px; ;
 `;
 
 export default Header;
