@@ -15,11 +15,11 @@ function LoginForm() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Form>
                     <TextForm>Username</TextForm>
-                    <InputForm {...register('Username', { required: true })} />
+                    <InputForm type="email" {...register('Username', { required: true })} />
                 </Form>
                 <Form>
                     <TextForm>Password</TextForm>
-                    <InputForm {...register('Password', { required: true })} />
+                    <InputForm type="password" {...register('Password', { required: true })} />
                 </Form>
                 <CheckBox>
                     <input name="remember" type="checkbox" {...register('remember')} />

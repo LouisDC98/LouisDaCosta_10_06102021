@@ -4,7 +4,7 @@ import Header from '../../components/Header/Header';
 import Slogan from '../../components/Slogan/Slogan';
 import Catch from '../../components/Catch/Catch';
 
-function homePage() {
+function HomePage() {
     return (
         <React.Fragment>
             <Header sign={'in'} />
@@ -42,4 +42,4 @@ const CatchShape = styled.div`
     }
 `;
 
-export default homePage;
+export default HomePage;

@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import Header from '../../components/Header/Header';
 import LoginForm from '../../components/LoginForm/LoginForm';
 
-function loginPage() {
+function LoginPage() {
     return (
-        <div>
+        <React.Fragment>
             <Header sign={'in'} />
             <Form>
                 <LoginForm />
             </Form>
-        </div>
+        </React.Fragment>
     );
 }
 
@@ -24,4 +24,4 @@ const Form = styled.div`
     }
 `;
 
-export default loginPage;
+export default LoginPage;
