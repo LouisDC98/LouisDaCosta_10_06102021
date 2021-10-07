@@ -7,22 +7,22 @@ import security from '../../img/icon-security.png';
 function Catch(props) {
     const { logo, title, subtitle } = props;
 
-    let toto;
+    let img;
     switch (logo) {
         case 'chat':
-            toto = chat;
+            img = chat;
             break;
         case 'money':
-            toto = money;
+            img = money;
             break;
         case 'security':
-            toto = security;
+            img = security;
             break;
     }
 
     return (
         <BlocCatch>
-            <ImgCatch src={toto} />
+            <ImgCatch src={img} />
             <TitleCatch>{title}</TitleCatch>
             <SubtitleCatch>{subtitle}</SubtitleCatch>
         </BlocCatch>

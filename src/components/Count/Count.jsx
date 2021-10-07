@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 function Count(props) {
-    const { title, montant, description } = props;
+    const { title, montant, description, id } = props;
+
     return (
         <BgCount>
             <div>
@@ -10,7 +12,9 @@ function Count(props) {
                 <MontantCount>{montant}</MontantCount>
                 <DescriptionCount>{description}</DescriptionCount>
             </div>
-            <BtnCount>View transactions</BtnCount>
+            <Link to={'/count/' + id}>
+                <BtnCount>View transactions</BtnCount>
+            </Link>
         </BgCount>
     );
 }

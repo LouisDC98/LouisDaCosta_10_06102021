@@ -10,7 +10,7 @@ function LoginForm() {
     const history = useHistory();
 
     const onSubmit = (data) => {
-        history.push('/user/' + data.Username);
+        history.push('/user/' + data.username);
         console.log(data);
     };
 
