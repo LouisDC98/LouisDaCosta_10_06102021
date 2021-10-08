@@ -5,7 +5,7 @@ import { countData } from 'datas/count';
 import Accordion from 'components/Accordion/Accordion';
 import { transactions } from 'datas/transactions';
 
-function countPage() {
+function CountPage() {
     let params = useParams();
     const currentCount = countData.find((element) => element.id === params.id);
 
@@ -23,14 +23,8 @@ function countPage() {
                     <AmountColumn>AMOUNT</AmountColumn>
                     <BalanceColumn>BALANCE</BalanceColumn>
                 </ColumnCoutPage>
-                {transactions.map((data, index) => (
-                    <Accordion
-                        key={index + 1}
-                        date={data.date}
-                        description={data.description}
-                        montant={data.montant}
-                        balance={currentCount.montant}
-                    />
+                {transactions.map((data) => (
+                    <Accordion key={data.id} data={data} balance={currentCount.montant} />
                 ))}
             </BodyCountPage>
         </div>
@@ -98,4 +92,4 @@ const DescriptionCurrentCount = styled.p`
     color: #2c3e50;
 `;
 
-export default countPage;
+export default CountPage;
