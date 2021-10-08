@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import SelectForm from 'components/SelectForm/SelectForm';
 import TextForm from 'components/TextForm/TextForm';
@@ -29,6 +30,11 @@ function Accordion(props) {
         </AccordionBody>
     );
 }
+
+Accordion.propTypes = {
+    data: PropTypes.object.isRequired,
+    balance: PropTypes.number.isRequired
+};
 
 const AccordionBody = styled.div`
     margin: 15px 0px;

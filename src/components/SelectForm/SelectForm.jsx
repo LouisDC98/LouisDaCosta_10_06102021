@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { FaEdit } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
@@ -45,6 +46,10 @@ function SelectForm(props) {
         </CategoryEdit>
     );
 }
+
+SelectForm.propTypes = {
+    currentCategory: PropTypes.string
+};
 
 const CategoryEdit = styled.div`
     display: flex;

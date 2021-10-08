@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import chat from '../../img/icon-chat.png';
 import money from '../../img/icon-money.png';
 import security from '../../img/icon-security.png';
@@ -28,6 +29,12 @@ function Catch(props) {
         </BlocCatch>
     );
 }
+
+Catch.propTypes = {
+    logo: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired
+};
 
 const BlocCatch = styled.div`
     background-color: white;

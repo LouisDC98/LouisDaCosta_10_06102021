@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { FaEdit, FaCheck } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
@@ -41,6 +42,10 @@ function TextForm(props) {
         </NoteEdit>
     );
 }
+
+TextForm.propTypes = {
+    data: PropTypes.string
+};
 
 const NoteEdit = styled.div`
     display: flex;

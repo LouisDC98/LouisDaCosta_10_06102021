@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function Count(props) {
@@ -18,6 +19,13 @@ function Count(props) {
         </BgCount>
     );
 }
+
+Count.propTypes = {
+    title: PropTypes.string,
+    montant: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.string.isRequired
+};
 
 const BgCount = styled.section`
     display: block;

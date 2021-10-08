@@ -12,9 +12,9 @@ function UserPage() {
         <BgUserPage>
             <TitleUserPage>Welcome back {params.id} !</TitleUserPage>
             <EditName />
-            {countData.map((data, index) => (
+            {countData.map((data) => (
                 <Count
-                    key={index + 1}
+                    key={data.id}
                     montant={'$' + data.montant}
                     title={data.title}
                     description={data.description}
