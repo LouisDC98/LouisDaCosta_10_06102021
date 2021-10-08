@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaChevronUp, FaChevronDown } from 'react-icons/fa';
 import SelectForm from 'components/SelectForm/SelectForm';
+import TextForm from 'components/TextForm/TextForm';
 
 function Accordion(props) {
     const { data, balance } = props;
@@ -22,7 +23,8 @@ function Accordion(props) {
             </AccordionTitle>
             <AccordionContent style={{ display: open ? 'block' : 'none' }}>
                 <p>Transaction Type: {data.type}</p>
-                <SelectForm currentTransaction={data.category} />
+                <SelectForm currentCategory={data.category} />
+                <TextForm currentNote={data.note} />
             </AccordionContent>
         </AccordionBody>
     );

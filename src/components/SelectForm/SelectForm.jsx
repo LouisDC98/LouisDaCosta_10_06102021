@@ -4,8 +4,8 @@ import { FaEdit } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
 function SelectForm(props) {
-    const { currentTransaction } = props;
-    const [selected, setSelected] = useState(currentTransaction);
+    const { currentCategory } = props;
+    const [selected, setSelected] = useState(currentCategory);
     const [editCategory, setEditCategory] = useState(false);
 
     const displayCategoryForm = () => {
@@ -15,35 +15,34 @@ function SelectForm(props) {
     const onSubmit = (data) => {
         console.log(data.category);
         setSelected(data.category);
+        displayCategoryForm();
     };
 
     const { register, handleSubmit } = useForm();
 
     return (
-        <div>
-            <CategoryEdit>
-                <p>Category :</p>
-                {!editCategory ? (
-                    <SelectedCategory>{selected}</SelectedCategory>
-                ) : (
-                    <form onChange={handleSubmit(onSubmit)}>
-                        <SelectFormShape>
-                            <select
-                                defaultValue={selected}
-                                {...register('category', { required: true })}>
-                                <option value="">--Choisissez une catégorie--</option>
-                                <option value="Food">Food</option>
-                                <option value="Internet">Internet</option>
-                                <option value="Rent">Rent</option>
-                            </select>
-                        </SelectFormShape>
-                    </form>
-                )}
-                <EditBtn onClick={displayCategoryForm}>
-                    <FaEdit />
-                </EditBtn>
-            </CategoryEdit>
-        </div>
+        <CategoryEdit>
+            <p>Category :</p>
+            {!editCategory ? (
+                <SelectedCategory>{selected}</SelectedCategory>
+            ) : (
+                <form onChange={handleSubmit(onSubmit)}>
+                    <SelectFormShape>
+                        <select
+                            defaultValue={selected}
+                            {...register('category', { required: true })}>
+                            <option value="">--Choisissez une catégorie--</option>
+                            <option value="Food">Food</option>
+                            <option value="Internet">Internet</option>
+                            <option value="Rent">Rent</option>
+                        </select>
+                    </SelectFormShape>
+                </form>
+            )}
+            <EditBtn onClick={displayCategoryForm}>
+                <FaEdit />
+            </EditBtn>
+        </CategoryEdit>
     );
 }
 
