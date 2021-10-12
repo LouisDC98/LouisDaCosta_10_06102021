@@ -4,18 +4,23 @@ import PropTypes from 'prop-types';
 import { FaEdit } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
+import { useDispatch } from 'react-redux';
+import { changeCategory } from '../../features/transactionSlice';
+
 function SelectForm(props) {
-    const { currentCategory } = props;
+    const { currentCategory, transactionId } = props;
     const [selected, setSelected] = useState(currentCategory);
     const [editCategory, setEditCategory] = useState(false);
+
+    const dispatch = useDispatch();
 
     const displayCategoryForm = () => {
         setEditCategory((value) => !value);
     };
 
     const onSubmit = (data) => {
-        console.log(data.category);
         setSelected(data.category);
+        dispatch(changeCategory({ category: data.category, id: transactionId }));
         displayCategoryForm();
     };
 

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 
 function EditName() {
-    const [display, setDisplay] = useState(true);
+    const [display, setDisplay] = useState(false);
     const { register, handleSubmit } = useForm();
 
     const handleClick = () => {

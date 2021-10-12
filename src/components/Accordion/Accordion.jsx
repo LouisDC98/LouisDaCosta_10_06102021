@@ -24,8 +24,8 @@ function Accordion(props) {
             </AccordionTitle>
             <AccordionContent style={{ display: open ? 'block' : 'none' }}>
                 <p>Transaction Type: {data.type}</p>
-                <SelectForm currentCategory={data.category} />
-                <TextForm currentNote={data.note} />
+                <SelectForm currentCategory={data.category} transactionId={data.id} />
+                <TextForm currentNote={data.note} transactionId={data.id} />
             </AccordionContent>
         </AccordionBody>
     );

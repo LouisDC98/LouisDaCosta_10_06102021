@@ -4,18 +4,23 @@ import PropTypes from 'prop-types';
 import { FaEdit, FaCheck } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 
+import { useDispatch } from 'react-redux';
+import { changeNote } from '../../features/transactionSlice';
+
 function TextForm(props) {
-    const { currentNote } = props;
+    const { currentNote, transactionId } = props;
     const [selected, setSelected] = useState(currentNote);
     const [editNote, setEditNote] = useState(false);
+
+    const dispatch = useDispatch();
 
     const displayNoteForm = () => {
         setEditNote((value) => !value);
     };
 
     const onSubmit = (data) => {
-        console.log(data.note);
         setSelected(data.note);
+        dispatch(changeNote({ note: data.note, id: transactionId }));
         displayNoteForm();
     };
 

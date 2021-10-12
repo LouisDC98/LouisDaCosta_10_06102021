@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router';
-import { countData } from 'datas/count';
 import Accordion from 'components/Accordion/Accordion';
-import { transactions } from 'datas/transactions';
+import { selectCount, selectTransaction } from '../../utils/selectors';
+import { useSelector } from 'react-redux';
 
 function CountPage() {
     let params = useParams();
+    const transactions = useSelector(selectTransaction);
+    const countData = useSelector(selectCount);
     const currentCount = countData.find((element) => element.id === params.id);
 
     return (
