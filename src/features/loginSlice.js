@@ -2,6 +2,7 @@
 import { selectUser } from '../utils/selectors';
 // import { useSelector } from 'react-redux';
 import produce from 'immer';
+import API from 'datas/API';
 
 const initialState = {
     status: 'void',
@@ -34,13 +35,9 @@ export function fetchOrUpdateLogin(account) {
         }
         dispatch(loginFetching());
         try {
-            const content = JSON.stringify(account);
-            const response = await fetch('http://localhost:3001/api/v1/user/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: content
-            });
-            const data = await response.json();
+            const response = API.login(account);
+            const data = await response;
+            console.log(data.data.body);
             dispatch(loginResolved(data));
         } catch (error) {
             dispatch(loginRejected(error));
