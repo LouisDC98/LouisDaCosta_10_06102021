@@ -28,17 +28,14 @@ const loginRejected = (error) => ({
 
 export function fetchOrUpdateLogin(account) {
     return async (dispatch, getState) => {
-        const selectEmail = selectUser(account.email);
-        const status = selectEmail(getState()).status;
+        const status = selectUser(getState()).status;
         if (status === 'pending' || status === 'updating') {
             return;
         }
         dispatch(loginFetching());
         try {
-            const response = API.login(account);
-            const data = await response;
-            console.log(data.data.body);
-            dispatch(loginResolved(data));
+            const response = await API.login(account);
+            dispatch(loginResolved(response.data.body.token));
         } catch (error) {
             dispatch(loginRejected(error));
         }
@@ -66,7 +63,7 @@ export default function loginReducer(state = initialState, action) {
             }
             case RESOLVED: {
                 if (draft.status === 'pending' || draft.status === 'updating') {
-                    draft.data = action.payload;
+                    draft.data.token = action.payload;
                     draft.status = 'resolved';
                     return;
                 }
