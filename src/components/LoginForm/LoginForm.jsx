@@ -3,25 +3,19 @@ import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
-
 import { useDispatch } from 'react-redux';
-import { fetchOrUpdateLogin } from '../../features/loginSlice';
-// import { selectLogin } from '../../utils/selectors';
-// import { useSelector } from 'react-redux';
+import { login } from '../../features/loginSlice';
 
 function LoginForm() {
     const { register, handleSubmit } = useForm();
 
     const history = useHistory();
     const dispatch = useDispatch();
-    // const loginData = useSelector(selectLogin);
-    // console.log(loginData);
 
     const onSubmit = (data) => {
-        dispatch(fetchOrUpdateLogin(data))
+        dispatch(login(data))
             .then(() => {
                 history.push('/user/profile');
-                console.log(data);
             })
             .catch((error) => {
                 alert(error);

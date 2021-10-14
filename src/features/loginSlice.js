@@ -40,7 +40,7 @@ const { actions, reducer } = createSlice({
     }
 });
 
-export function fetchOrUpdateLogin(account) {
+export function login(account) {
     return async (dispatch, getState) => {
         const status = selectUser(getState()).status;
         if (status === 'pending' || status === 'updating') {
