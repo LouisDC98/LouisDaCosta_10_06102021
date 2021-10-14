@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { selectUser } from 'utils/selectors';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { updateProfile } from 'features/userSlice';
 
 function EditName() {
     const [display, setDisplay] = useState(false);
     const { register, handleSubmit } = useForm();
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
 
     const handleClick = () => {
         setDisplay(!display);
     };
 
     const onSubmit = (data) => {
-        console.log(data);
+        dispatch(updateProfile(data));
         setDisplay(!display);
     };
 
@@ -23,12 +29,12 @@ function EditName() {
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <FormShape>
                         <InputForm
-                            placeholder="Firstname"
+                            placeholder={user.data.firstName}
                             type="text"
                             {...register('newFirstname')}
                         />
                         <InputForm
-                            placeholder="Lastname"
+                            placeholder={user.data.lastName}
                             type="text"
                             {...register('newLastname')}
                         />

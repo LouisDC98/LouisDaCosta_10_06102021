@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { selectUser } from '../utils/selectors';
+import { selectToken } from '../utils/selectors';
 import API from 'datas/API';
 
 const initialState = {
@@ -42,7 +42,7 @@ const { actions, reducer } = createSlice({
 
 export function login(account) {
     return async (dispatch, getState) => {
-        const status = selectUser(getState()).status;
+        const status = selectToken(getState()).status;
         if (status === 'pending' || status === 'updating') {
             return;
         }

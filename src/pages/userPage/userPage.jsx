@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router';
 import EditName from 'components/EditName/EditName';
 import Count from 'components/Count/Count';
 import { countData } from 'datas/count';
+import { useDispatch } from 'react-redux';
+import { getProfile } from 'features/userSlice';
+import { selectUser } from 'utils/selectors';
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router';
 
 function UserPage() {
-    let params = useParams();
+    const dispatch = useDispatch();
+    const user = useSelector(selectUser);
+
+    useEffect(() => {
+        dispatch(getProfile());
+    }, []);
+
+    if (!user) {
+        return <Redirect to="/"></Redirect>;
+    }
 
     return (
         <BgUserPage>
-            <TitleUserPage>Welcome back {params.id} !</TitleUserPage>
+            <TitleUserPage>Welcome back {user?.data?.firstName} !</TitleUserPage>
             <EditName />
             {countData.map((data) => (
                 <Count

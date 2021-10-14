@@ -9,11 +9,15 @@ class API {
     static async signUp() {
         return axios.post(`/user/signup`);
     }
-    static async userProfile() {
-        return axios.post(`/user/profile`);
+    static async userProfile(token) {
+        return axios.post(`/user/profile`, undefined, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
     }
-    static async updateUserProfile() {
-        return axios.put(`/user/profile`);
+    static async updateUserProfile(data, token) {
+        return axios.put(`/user/profile`, data, {
+            headers: { Authorization: `Bearer ${token}` }
+        });
     }
 }
 

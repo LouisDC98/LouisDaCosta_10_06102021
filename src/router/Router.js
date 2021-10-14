@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import homePage from './homePage/homePage.jsx';
-import loginPage from './loginPage/loginPage.jsx';
-import userPage from './userPage/userPage.jsx';
-import countPage from './countPage/countPage.jsx';
+import homePage from '../pages/homePage/homePage.jsx';
+import loginPage from '../pages/loginPage/loginPage.jsx';
+import userPage from '../pages/userPage/userPage.jsx';
+import countPage from '../pages/countPage/countPage.jsx';
 
 class Router extends React.Component {
     render() {
