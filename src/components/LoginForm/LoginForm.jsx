@@ -18,9 +18,14 @@ function LoginForm() {
     // console.log(loginData);
 
     const onSubmit = (data) => {
-        dispatch(fetchOrUpdateLogin(data));
-        history.push('/user/' + data.email);
-        console.log(data);
+        dispatch(fetchOrUpdateLogin(data))
+            .then(() => {
+                history.push('/user/profile');
+                console.log(data);
+            })
+            .catch((error) => {
+                alert(error);
+            });
     };
 
     return (
