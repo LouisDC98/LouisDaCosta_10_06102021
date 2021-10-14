@@ -4,13 +4,22 @@ import { FaUserCircle } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
 
+import { useDispatch } from 'react-redux';
+import { fetchOrUpdateLogin } from '../../features/loginSlice';
+// import { selectLogin } from '../../utils/selectors';
+// import { useSelector } from 'react-redux';
+
 function LoginForm() {
     const { register, handleSubmit } = useForm();
 
     const history = useHistory();
+    const dispatch = useDispatch();
+    // const loginData = useSelector(selectLogin);
+    // console.log(loginData);
 
     const onSubmit = (data) => {
-        history.push('/user/' + data.username);
+        dispatch(fetchOrUpdateLogin(data));
+        history.push('/user/' + data.email);
         console.log(data);
     };
 
@@ -21,16 +30,16 @@ function LoginForm() {
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Form>
                     <TextForm>Username</TextForm>
-                    <InputForm type="email" {...register('username', { required: true })} />
+                    <InputForm type="email" {...register('email', { required: true })} />
                 </Form>
                 <Form>
                     <TextForm>Password</TextForm>
                     <InputForm type="password" {...register('password', { required: true })} />
                 </Form>
-                <CheckBox>
+                {/* <CheckBox>
                     <input name="remember" type="checkbox" {...register('remember')} />
                     <TextCheckBox htmlFor="remember">Remember me</TextCheckBox>
-                </CheckBox>
+                </CheckBox> */}
 
                 <BtnLogin type="submit" title="Se connecter">
                     Sign In
@@ -76,15 +85,15 @@ const TitleForm = styled.h1`
     margin: 18px 0 20px 0;
 `;
 
-const CheckBox = styled.div`
-    text-align: start;
-    margin-bottom: -1px;
-`;
+// const CheckBox = styled.div`
+//     text-align: start;
+//     margin-bottom: -1px;
+// `;
 
-const TextCheckBox = styled.label`
-    margin-left: 0.25rem;
-    color: #2c3e50;
-`;
+// const TextCheckBox = styled.label`
+//     margin-left: 0.25rem;
+//     color: #2c3e50;
+// `;
 
 const BtnLogin = styled.button`
     background-color: #00bc77;

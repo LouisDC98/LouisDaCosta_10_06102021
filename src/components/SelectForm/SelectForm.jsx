@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { FaEdit } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
-
 import { useDispatch } from 'react-redux';
 import { changeCategory } from '../../features/transactionSlice';
 
