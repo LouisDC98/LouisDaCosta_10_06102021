@@ -36,6 +36,9 @@ const { actions, reducer } = createSlice({
                 state.data = null;
                 state.status = 'rejected';
             }
+        },
+        resetToken: (state) => {
+            state.data = null;
         }
     }
 });
@@ -57,4 +60,5 @@ export function login(account) {
     };
 }
 
+export const { resetToken } = actions;
 export default reducer;

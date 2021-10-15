@@ -1,32 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import logo from '../../img/argentBankLogo.png';
 import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { selectToken } from 'utils/selectors';
+import { selectUser } from 'utils/selectors';
+import { resetToken } from '../../features/loginSlice';
+import { useDispatch } from 'react-redux';
 
 function Header() {
-    const [sign, setSign] = useState('in');
+    let token = useSelector(selectToken);
+    let user = useSelector(selectUser);
+    const dispatch = useDispatch();
 
-    const handleClick = () => {
-        setSign(sign === 'in' ? 'out' : 'in');
-    };
+    const isLogin = token.data != null;
 
     return (
         <NavHeader>
             <HomeLink to="/">
                 <LogoHeader src={logo}></LogoHeader>
             </HomeLink>
-            <button onClick={handleClick}>X</button>
             <BlocLink>
-                {sign === 'out' && (
+                {isLogin && (
                     <ProfileHeader>
                         <FaUserCircle />
-                        <LinkHeader to="/">name</LinkHeader>
+                        <LinkHeader to="/">{user.data?.firstName}</LinkHeader>
                     </ProfileHeader>
                 )}
-                <SignHeader to="/login">
-                    {sign === 'in' ? <FaUserCircle /> : <FaSignOutAlt />}
-                    <LinkHeader>{sign === 'in' ? 'Sign In' : 'Sign Out'}</LinkHeader>
+                <SignHeader
+                    to="/login"
+                    onClick={() => {
+                        dispatch(resetToken());
+                    }}>
+                    {isLogin ? <FaSignOutAlt /> : <FaUserCircle />}
+                    <LinkHeader>{isLogin ? 'Sign Out' : 'Sign In'}</LinkHeader>
                 </SignHeader>
             </BlocLink>
         </NavHeader>
