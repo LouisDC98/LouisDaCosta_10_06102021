@@ -18,7 +18,6 @@ export function getProfile() {
         dispatch(actions.fetching());
         try {
             const response = await API.userProfile(selectToken(getState()).data);
-            console.log(response);
             dispatch(actions.resolved(response.data.body));
         } catch (error) {
             dispatch(actions.rejected(error));

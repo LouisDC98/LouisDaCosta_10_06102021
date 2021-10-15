@@ -4,6 +4,7 @@ import homePage from '../pages/homePage/homePage.jsx';
 import loginPage from '../pages/loginPage/loginPage.jsx';
 import userPage from '../pages/userPage/userPage.jsx';
 import countPage from '../pages/countPage/countPage.jsx';
+import PrivateRoute from './PrivateRoute.jsx';
 
 class Router extends React.Component {
     render() {
@@ -16,7 +17,10 @@ class Router extends React.Component {
             {
                 path: '/login',
                 component: loginPage
-            },
+            }
+        ];
+
+        const protectedRoutes = [
             {
                 path: '/user/:id',
                 component: userPage
@@ -30,6 +34,10 @@ class Router extends React.Component {
             <Switch>
                 {routes.map((route) => (
                     <Route key={route.path} {...route} />
+                ))}
+
+                {protectedRoutes.map((route) => (
+                    <PrivateRoute key={route.path} {...route} />
                 ))}
             </Switch>
         );
