@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../features/loginSlice';
 
 function LoginForm() {
+    const [displayError, setDisplayError] = useState(null);
     const { register, handleSubmit } = useForm();
 
     const history = useHistory();
@@ -15,10 +16,17 @@ function LoginForm() {
     const onSubmit = (data) => {
         dispatch(login(data))
             .then(() => {
+                setDisplayError(false);
                 history.push('/user/profile');
             })
             .catch((error) => {
-                alert(error);
+                if (error === 'Error: User not found!') {
+                    setDisplayError('Email invalid');
+                } else if (error === 'Error: Password is invalid') {
+                    setDisplayError('Password invalid');
+                } else {
+                    setDisplayError(error);
+                }
             });
     };
 
@@ -39,7 +47,7 @@ function LoginForm() {
                     <input name="remember" type="checkbox" {...register('remember')} />
                     <TextCheckBox htmlFor="remember">Remember me</TextCheckBox>
                 </CheckBox> */}
-
+                {displayError && <Error>{displayError}</Error>}
                 <BtnLogin type="submit" title="Se connecter">
                     Sign In
                 </BtnLogin>
@@ -94,6 +102,10 @@ const TitleForm = styled.h1`
 //     color: #2c3e50;
 // `;
 
+const Error = styled.div`
+    color: red;
+`;
+
 const BtnLogin = styled.button`
     background-color: #00bc77;
     color: white;
@@ -104,6 +116,7 @@ const BtnLogin = styled.button`
     padding: 8px;
     margin-top: 16px;
     text-decoration: underline;
+    cursor: pointer;
 `;
 
 export default LoginForm;
