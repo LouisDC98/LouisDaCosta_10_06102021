@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/loginSlice';
+import { Errors } from 'datas/Errors';
 
 function LoginForm() {
-    const [displayError, setDisplayError] = useState(null);
-    const { register, handleSubmit } = useForm();
+    const {
+        register,
+        handleSubmit,
+        setError,
+        formState: { errors },
+        reset
+    } = useForm();
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -16,17 +22,28 @@ function LoginForm() {
     const onSubmit = (data) => {
         dispatch(login(data))
             .then(() => {
-                setDisplayError(false);
                 history.push('/user/profile');
             })
             .catch((error) => {
-                if (error === 'Error: User not found!') {
-                    setDisplayError('Email invalid');
-                } else if (error === 'Error: Password is invalid') {
-                    setDisplayError('Password invalid');
+                let formError = { inputName: '', message: '' };
+                if (error === Errors.E_UNKUSER) {
+                    formError.inputName = 'email';
+                    formError.message = 'Utilisateur introuvable';
+                } else if (error === Errors.E_BADPWD) {
+                    reset({
+                        ...data,
+                        password: ''
+                    });
+                    formError.inputName = 'password';
+                    formError.message = 'Mot de passe invalide';
                 } else {
-                    setDisplayError(error);
+                    console.error(error);
+                    return;
                 }
+                setError(formError.inputName, {
+                    type: 'manual',
+                    message: formError.message
+                });
             });
     };
 
@@ -38,16 +55,18 @@ function LoginForm() {
                 <Form>
                     <TextForm>Username</TextForm>
                     <InputForm type="email" {...register('email', { required: true })} />
+                    {errors.email && <Error>{errors.email.message}</Error>}
                 </Form>
                 <Form>
                     <TextForm>Password</TextForm>
                     <InputForm type="password" {...register('password', { required: true })} />
+                    {errors.password && <Error>{errors.password.message}</Error>}
                 </Form>
                 {/* <CheckBox>
                     <input name="remember" type="checkbox" {...register('remember')} />
                     <TextCheckBox htmlFor="remember">Remember me</TextCheckBox>
                 </CheckBox> */}
-                {displayError && <Error>{displayError}</Error>}
+
                 <BtnLogin type="submit" title="Se connecter">
                     Sign In
                 </BtnLogin>
@@ -102,7 +121,7 @@ const TitleForm = styled.h1`
 //     color: #2c3e50;
 // `;
 
-const Error = styled.div`
+const Error = styled.p`
     color: red;
 `;
 
