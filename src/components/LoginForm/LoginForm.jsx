@@ -62,11 +62,6 @@ function LoginForm() {
                     <InputForm type="password" {...register('password', { required: true })} />
                     {errors.password && <Error>{errors.password.message}</Error>}
                 </Form>
-                {/* <CheckBox>
-                    <input name="remember" type="checkbox" {...register('remember')} />
-                    <TextCheckBox htmlFor="remember">Remember me</TextCheckBox>
-                </CheckBox> */}
-
                 <BtnLogin type="submit" title="Se connecter">
                     Sign In
                 </BtnLogin>
@@ -110,16 +105,6 @@ const TitleForm = styled.h1`
     color: #2c3e50;
     margin: 18px 0 20px 0;
 `;
-
-// const CheckBox = styled.div`
-//     text-align: start;
-//     margin-bottom: -1px;
-// `;
-
-// const TextCheckBox = styled.label`
-//     margin-left: 0.25rem;
-//     color: #2c3e50;
-// `;
 
 const Error = styled.p`
     color: red;

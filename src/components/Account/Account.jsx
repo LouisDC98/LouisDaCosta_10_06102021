@@ -3,31 +3,31 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function Count(props) {
+function Account(props) {
     const { title, montant, description, id } = props;
 
     return (
-        <BgCount>
+        <BgAccount>
             <div>
-                <TitleCount>{title}</TitleCount>
-                <MontantCount>{montant}</MontantCount>
-                <DescriptionCount>{description}</DescriptionCount>
+                <TitleAccount>{title}</TitleAccount>
+                <MontantAccount>{montant}</MontantAccount>
+                <DescriptionAccount>{description}</DescriptionAccount>
             </div>
-            <Link to={'/count/' + id}>
-                <BtnCount>View transactions</BtnCount>
+            <Link to={'/account/' + id}>
+                <BtnAccount>View transactions</BtnAccount>
             </Link>
-        </BgCount>
+        </BgAccount>
     );
 }
 
-Count.propTypes = {
+Account.propTypes = {
     title: PropTypes.string,
     montant: PropTypes.string,
     description: PropTypes.string,
     id: PropTypes.string.isRequired
 };
 
-const BgCount = styled.section`
+const BgAccount = styled.section`
     display: block;
     background-color: white;
     width: 80%;
@@ -40,14 +40,14 @@ const BgCount = styled.section`
     }
 `;
 
-const TitleCount = styled.p`
+const TitleAccount = styled.p`
     padding: 0;
     margin: 0;
     font-size: 1rem;
     color: #2c3e50;
 `;
 
-const MontantCount = styled.p`
+const MontantAccount = styled.p`
     padding: 0;
     margin: 0;
     font-size: 2.5rem;
@@ -55,14 +55,14 @@ const MontantCount = styled.p`
     color: #2c3e50;
 `;
 
-const DescriptionCount = styled.p`
+const DescriptionAccount = styled.p`
     padding: 0;
     margin: 0;
     font-size: 1rem;
     color: #2c3e50;
 `;
 
-const BtnCount = styled.button`
+const BtnAccount = styled.button`
     height: 41px;
     width: 100%;
     padding: 8px;
@@ -78,4 +78,4 @@ const BtnCount = styled.button`
     }
 `;
 
-export default Count;
+export default Account;

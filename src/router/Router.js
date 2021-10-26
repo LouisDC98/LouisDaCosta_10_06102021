@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import homePage from '../pages/homePage/homePage.jsx';
 import loginPage from '../pages/loginPage/loginPage.jsx';
 import userPage from '../pages/userPage/userPage.jsx';
-import countPage from '../pages/countPage/countPage.jsx';
+import accountPage from '../pages/accountPage/accountPage.jsx';
 import PrivateRoute from './PrivateRoute.jsx';
 
 class Router extends React.Component {
@@ -26,8 +26,8 @@ class Router extends React.Component {
                 component: userPage
             },
             {
-                path: '/count/:id',
-                component: countPage
+                path: '/account/:id',
+                component: accountPage
             }
         ];
         return (

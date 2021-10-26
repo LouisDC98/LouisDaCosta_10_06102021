@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import EditName from 'components/EditName/EditName';
-import Count from 'components/Count/Count';
-import { countData } from 'datas/count';
+import Account from 'components/Account/Account';
+import { accountData } from 'datas/account';
 import { useDispatch } from 'react-redux';
 import { getProfile } from 'features/userSlice';
 import { selectUser } from 'utils/selectors';
@@ -20,8 +20,8 @@ function UserPage() {
         <BgUserPage>
             <TitleUserPage>Welcome back {user?.data?.firstName} !</TitleUserPage>
             <EditName />
-            {countData.map((data) => (
-                <Count
+            {accountData.map((data) => (
+                <Account
                     key={data.id}
                     montant={'$' + data.montant}
                     title={data.title}

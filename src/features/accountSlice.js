@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { countData } from 'datas/count';
+import { accountData } from 'datas/account';
 
 const { reducer } = createSlice({
-    name: 'count',
-    initialState: countData,
+    name: 'account',
+    initialState: accountData,
     reducer: {}
 });
 

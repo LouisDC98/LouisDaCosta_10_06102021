@@ -1,4 +1,4 @@
-export const selectCount = (state) => state.count;
+export const selectAccount = (state) => state.account;
 
 export const selectTransaction = (state) => state.transaction.value;
 

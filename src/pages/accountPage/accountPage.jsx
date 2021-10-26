@@ -2,23 +2,23 @@ import React from 'react';
 import styled from 'styled-components';
 import { useParams } from 'react-router';
 import Accordion from 'components/Accordion/Accordion';
-import { selectCount, selectTransaction } from '../../utils/selectors';
+import { selectAccount, selectTransaction } from '../../utils/selectors';
 import { useSelector } from 'react-redux';
 
-function CountPage() {
+function AccountPage() {
     let params = useParams();
     const transactions = useSelector(selectTransaction);
-    const countData = useSelector(selectCount);
-    const currentCount = countData.find((element) => element.id === params.id);
+    const accountData = useSelector(selectAccount);
+    const currentAccount = accountData.find((element) => element.id === params.id);
 
     return (
         <div>
-            <InfoCurentCount>
-                <TitleCurrentCount>{currentCount.title}</TitleCurrentCount>
-                <MontantCurrentCount>{'$' + currentCount.montant}</MontantCurrentCount>
-                <DescriptionCurrentCount>{currentCount.description}</DescriptionCurrentCount>
-            </InfoCurentCount>
-            <BodyCountPage>
+            <InfoCurentAccount>
+                <TitleCurrentAccount>{currentAccount.title}</TitleCurrentAccount>
+                <MontantCurrentAccount>{'$' + currentAccount.montant}</MontantCurrentAccount>
+                <DescriptionCurrentAccount>{currentAccount.description}</DescriptionCurrentAccount>
+            </InfoCurentAccount>
+            <BodyAccountPage>
                 <ColumnCoutPage>
                     <DateColumn>DATE</DateColumn>
                     <DescriptionColumn>DESCRIPTION</DescriptionColumn>
@@ -26,14 +26,14 @@ function CountPage() {
                     <BalanceColumn>BALANCE</BalanceColumn>
                 </ColumnCoutPage>
                 {transactions.map((data) => (
-                    <Accordion key={data.id} data={data} balance={currentCount.montant} />
+                    <Accordion key={data.id} data={data} balance={currentAccount.montant} />
                 ))}
-            </BodyCountPage>
+            </BodyAccountPage>
         </div>
     );
 }
 
-const BodyCountPage = styled.div`
+const BodyAccountPage = styled.div`
     background-color: #12002b;
     padding: 32px;
 `;
@@ -67,19 +67,19 @@ const BalanceColumn = styled.p`
     margin: 0;
 `;
 
-const InfoCurentCount = styled.div`
+const InfoCurentAccount = styled.div`
     margin: 32px;
     text-align: center;
 `;
 
-const TitleCurrentCount = styled.p`
+const TitleCurrentAccount = styled.p`
     padding: 0;
     margin: 0;
     font-size: 1rem;
     color: #2c3e50;
 `;
 
-const MontantCurrentCount = styled.p`
+const MontantCurrentAccount = styled.p`
     padding: 0;
     margin: 0;
     font-size: 2.5rem;
@@ -87,11 +87,11 @@ const MontantCurrentCount = styled.p`
     color: #2c3e50;
 `;
 
-const DescriptionCurrentCount = styled.p`
+const DescriptionCurrentAccount = styled.p`
     padding: 0;
     margin: 0;
     font-size: 1rem;
     color: #2c3e50;
 `;
 
-export default CountPage;
+export default AccountPage;
