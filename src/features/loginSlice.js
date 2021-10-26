@@ -8,41 +8,6 @@ const initialState = {
     error: null
 };
 
-const { actions, reducer } = createSlice({
-    name: 'login',
-    initialState,
-    reducers: {
-        fetching: (state) => {
-            if (state.status === 'void') {
-                state.status = 'pending';
-            }
-            if (state.status === 'rejected') {
-                state.error = null;
-                state.status = 'pending';
-            }
-            if (state.status === 'resolved') {
-                state.status = 'updating';
-            }
-        },
-        resolved: (state, action) => {
-            if (state.status === 'pending' || state.status === 'updating') {
-                state.data = action.payload;
-                state.status = 'resolved';
-            }
-        },
-        rejected: (state, action) => {
-            if (state.status === 'pending' || state.status === 'updating') {
-                state.error = action.payload;
-                state.data = null;
-                state.status = 'rejected';
-            }
-        },
-        resetToken: (state) => {
-            state.data = null;
-        }
-    }
-});
-
 export function login(account) {
     return async (dispatch, getState) => {
         const status = selectToken(getState()).status;
@@ -59,6 +24,43 @@ export function login(account) {
         }
     };
 }
+
+const { actions, reducer } = createSlice({
+    name: 'login',
+    initialState,
+    reducers: {
+        fetching: (state) => {
+            if (state.status === 'void') {
+                state.status = 'pending';
+            }
+            if (state.status === 'rejected') {
+                state.error = null;
+                state.status = 'pending';
+            }
+            if (state.status === 'resolved') {
+                state.status = 'updating';
+            }
+        },
+        //when API call is resolved data egal payload
+        resolved: (state, action) => {
+            if (state.status === 'pending' || state.status === 'updating') {
+                state.data = action.payload;
+                state.status = 'resolved';
+            }
+        },
+        //when API call is rejected error egal payload
+        rejected: (state, action) => {
+            if (state.status === 'pending' || state.status === 'updating') {
+                state.error = action.payload;
+                state.data = null;
+                state.status = 'rejected';
+            }
+        },
+        resetToken: (state) => {
+            state.data = null;
+        }
+    }
+});
 
 export const { resetToken } = actions;
 export default reducer;

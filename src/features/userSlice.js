@@ -8,6 +8,7 @@ const initialState = {
     error: null
 };
 
+//get user profile informations
 export function getProfile() {
     return async (dispatch, getState) => {
         const status = selectUser(getState()).status;
@@ -25,6 +26,7 @@ export function getProfile() {
     };
 }
 
+//update firstName and lastName of the user
 export function updateProfile(data) {
     return async (dispatch, getState) => {
         const status = selectUser(getState()).status;
@@ -61,12 +63,14 @@ const { actions, reducer } = createSlice({
                 state.status = 'updating';
             }
         },
+        //when API call is resolved data egal payload
         resolved: (state, action) => {
             if (state.status === 'pending' || state.status === 'updating') {
                 state.data = action.payload;
                 state.status = 'resolved';
             }
         },
+        //when API call is rejected error egal payload
         rejected: (state, action) => {
             if (state.status === 'pending' || state.status === 'updating') {
                 state.error = action.payload;

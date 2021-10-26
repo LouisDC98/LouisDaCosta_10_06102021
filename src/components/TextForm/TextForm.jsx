@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { FaEdit, FaCheck } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
-
 import { useDispatch } from 'react-redux';
 import { changeNote } from '../../features/transactionSlice';
 
@@ -49,7 +48,8 @@ function TextForm(props) {
 }
 
 TextForm.propTypes = {
-    data: PropTypes.string
+    data: PropTypes.string,
+    transactionId: PropTypes.string
 };
 
 const NoteEdit = styled.div`

@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 import { getProfile } from 'features/userSlice';
 import { selectUser } from 'utils/selectors';
 import { useSelector } from 'react-redux';
-import { Redirect } from 'react-router';
 
 function UserPage() {
     const dispatch = useDispatch();
@@ -16,10 +15,6 @@ function UserPage() {
     useEffect(() => {
         dispatch(getProfile());
     }, []);
-
-    if (!user) {
-        return <Redirect to="/"></Redirect>;
-    }
 
     return (
         <BgUserPage>

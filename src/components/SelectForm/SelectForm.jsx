@@ -52,7 +52,8 @@ function SelectForm(props) {
 }
 
 SelectForm.propTypes = {
-    currentCategory: PropTypes.string
+    currentCategory: PropTypes.string,
+    transactionId: PropTypes.string
 };
 
 const CategoryEdit = styled.div`
