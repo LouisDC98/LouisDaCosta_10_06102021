@@ -22,7 +22,7 @@ class Router extends React.Component {
 
         const protectedRoutes = [
             {
-                path: '/user/:id',
+                path: '/profile',
                 component: userPage
             },
             {

@@ -22,7 +22,7 @@ function LoginForm() {
     const onSubmit = (data) => {
         dispatch(login(data))
             .then(() => {
-                history.push('/user/profile');
+                history.push('/profile');
             })
             .catch((error) => {
                 let formError = { inputName: '', message: '' };

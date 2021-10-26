@@ -14,7 +14,8 @@ function Header() {
     let user = useSelector(selectUser);
     const dispatch = useDispatch();
 
-    const isLogin = token.data != null;
+    let isLogin = token.data != null;
+    let redirect = isLogin ? '/' : '/login';
 
     return (
         <NavHeader>
@@ -29,7 +30,7 @@ function Header() {
                     </ProfileHeader>
                 )}
                 <SignHeader
-                    to="/login"
+                    to={redirect}
                     onClick={() => {
                         dispatch(resetToken());
                     }}>
