@@ -8,6 +8,7 @@ import { selectToken } from 'utils/selectors';
 import { selectUser } from 'utils/selectors';
 import { resetToken } from '../../features/loginSlice';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router';
 
 function Header() {
     let token = useSelector(selectToken);
@@ -15,7 +16,16 @@ function Header() {
     const dispatch = useDispatch();
 
     let isLogin = token.data != null;
-    let redirect = isLogin ? '/' : '/login';
+    let history = useHistory();
+
+    const handleClick = () => {
+        if (isLogin) {
+            history.push('/');
+            dispatch(resetToken());
+        } else {
+            history.push('/login');
+        }
+    };
 
     return (
         <NavHeader>
@@ -29,11 +39,7 @@ function Header() {
                         <LinkHeader to="/">{user.data?.firstName}</LinkHeader>
                     </ProfileHeader>
                 )}
-                <SignHeader
-                    to={redirect}
-                    onClick={() => {
-                        dispatch(resetToken());
-                    }}>
+                <SignHeader onClick={handleClick}>
                     {isLogin ? <FaSignOutAlt /> : <FaUserCircle />}
                     <LinkHeader>{isLogin ? 'Sign Out' : 'Sign In'}</LinkHeader>
                 </SignHeader>
@@ -73,7 +79,11 @@ const LinkHeader = styled.p`
     font-weight: bold;
 `;
 
-const SignHeader = styled(NavLink)`
+const SignHeader = styled.button`
+    padding: 0;
+    margin: 0;
+    border: none;
+    background-color: transparent;
     display: flex;
     justify-content: flex-end;
     align-items: center;
