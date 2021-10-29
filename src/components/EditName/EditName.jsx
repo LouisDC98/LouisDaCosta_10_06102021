@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { selectUser } from 'utils/selectors';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { updateProfile } from 'features/userSlice';
+import { updateUser } from 'features/userSlice';
 
 function EditName() {
     const [display, setDisplay] = useState(false);
@@ -17,7 +17,7 @@ function EditName() {
     };
 
     const onSubmit = (data) => {
-        dispatch(updateProfile(data));
+        dispatch(updateUser(data));
         setDisplay(!display);
     };
 
@@ -29,12 +29,12 @@ function EditName() {
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <FormShape>
                         <InputForm
-                            placeholder={user.data.firstName}
+                            placeholder={user.user.firstName}
                             type="text"
                             {...register('newFirstname')}
                         />
                         <InputForm
-                            placeholder={user.data.lastName}
+                            placeholder={user.user.lastName}
                             type="text"
                             {...register('newLastname')}
                         />

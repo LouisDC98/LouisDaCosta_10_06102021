@@ -1,84 +1,74 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { selectUser, selectToken } from '../utils/selectors';
 import API from 'datas/API';
 
-const initialState = {
-    status: 'void',
-    data: null,
-    error: null
-};
-
-//get user profile informations
-export function getProfile() {
-    return async (dispatch, getState) => {
-        const status = selectUser(getState()).status;
-        if (status === 'pending' || status === 'updating') {
-            return;
-        }
-
-        dispatch(actions.fetching());
-        try {
-            const response = await API.userProfile(selectToken(getState()).data);
-            dispatch(actions.resolved(response.data.body));
-        } catch (error) {
-            dispatch(actions.rejected(error));
-        }
-    };
-}
-
-//update firstName and lastName of the user
-export function updateProfile(data) {
-    return async (dispatch, getState) => {
-        const status = selectUser(getState()).status;
-        if (status === 'pending' || status === 'updating') {
-            return;
-        }
-
-        dispatch(actions.fetching());
-        try {
-            const response = await API.updateUserProfile(
-                { firstName: data.newFirstname, lastName: data.newLastname },
-                selectToken(getState()).data
-            );
-            dispatch(actions.resolved(response.data.body));
-        } catch (error) {
-            dispatch(actions.rejected(error));
-        }
-    };
-}
-
-const { actions, reducer } = createSlice({
-    name: 'profile',
-    initialState,
-    reducers: {
-        fetching: (state) => {
-            if (state.status === 'void') {
-                state.status = 'pending';
+export const getUser = createAsyncThunk(
+    'user/getUser',
+    async (arg, thunkAPI) => {
+        return await API.userProfile(selectToken(thunkAPI.getState()).data).then(
+            (res) => res.data.body
+        );
+    },
+    {
+        condition: (arg, thunkAPI) => {
+            const status = selectUser(thunkAPI.getState()).status;
+            if (status === 'pending' || status === 'updating') {
+                return false;
             }
-            if (state.status === 'rejected') {
-                state.error = null;
-                state.status = 'pending';
+        }
+    }
+);
+
+export const updateUser = createAsyncThunk(
+    'user/updateProfile',
+    async (arg, thunkAPI) => {
+        const response = await API.updateUserProfile(
+            { firstName: arg.newFirstname, lastName: arg.newLastname },
+            selectToken(thunkAPI.getState()).data
+        );
+        return response.data;
+    },
+    {
+        condition: (arg, thunkAPI) => {
+            const status = selectUser(thunkAPI.getState()).status;
+            if (status === 'pending' || status === 'updating') {
+                return false;
             }
-            if (state.status === 'resolved') {
-                state.status = 'updating';
-            }
+        }
+    }
+);
+
+const userSlice = createSlice({
+    name: 'user',
+    initialState: {
+        user: null,
+        status: null,
+        error: null
+    },
+    extraReducers: {
+        [getUser.pending]: (state) => {
+            state.status = 'loading';
         },
-        //when API call is resolved data egal payload
-        resolved: (state, action) => {
-            if (state.status === 'pending' || state.status === 'updating') {
-                state.data = action.payload;
-                state.status = 'resolved';
-            }
+        [getUser.fulfilled]: (state, action) => {
+            state.status = 'success';
+            state.user = action.payload;
         },
-        //when API call is rejected error egal payload
-        rejected: (state, action) => {
-            if (state.status === 'pending' || state.status === 'updating') {
-                state.error = action.payload;
-                state.data = null;
-                state.status = 'rejected';
-            }
+        [getUser.rejected]: (state, action) => {
+            state.status = 'failed';
+            state.error = action.error.message;
+        },
+        [updateUser.pending]: (state) => {
+            state.status = 'loading';
+        },
+        [updateUser.fulfilled]: (state, action) => {
+            state.status = 'success';
+            state.user = action.payload;
+        },
+        [updateUser.rejected]: (state, action) => {
+            state.status = 'failed';
+            state.error = action.error.message;
         }
     }
 });
 
-export default reducer;
+export default userSlice.reducer;

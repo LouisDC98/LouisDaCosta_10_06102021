@@ -36,7 +36,7 @@ function Header() {
                 {isLogin && (
                     <ProfileHeader>
                         <FaUserCircle />
-                        <LinkHeader to="/">{user.data?.firstName}</LinkHeader>
+                        <LinkHeader to="/">{user.user?.firstName}</LinkHeader>
                     </ProfileHeader>
                 )}
                 <SignHeader onClick={handleClick}>

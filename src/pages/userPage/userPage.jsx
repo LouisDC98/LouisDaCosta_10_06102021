@@ -4,7 +4,7 @@ import EditName from 'components/EditName/EditName';
 import Account from 'components/Account/Account';
 import { accountData } from 'datas/account';
 import { useDispatch } from 'react-redux';
-import { getProfile } from 'features/userSlice';
+import { getUser } from 'features/userSlice';
 import { selectUser } from 'utils/selectors';
 import { useSelector } from 'react-redux';
 
@@ -13,12 +13,12 @@ function UserPage() {
     const user = useSelector(selectUser);
 
     useEffect(() => {
-        dispatch(getProfile());
+        dispatch(getUser());
     }, []);
 
     return (
         <BgUserPage>
-            <TitleUserPage>Welcome back {user?.data?.firstName} !</TitleUserPage>
+            <TitleUserPage>Welcome back {user?.user?.firstName} !</TitleUserPage>
             <EditName />
             {accountData.map((data) => (
                 <Account
